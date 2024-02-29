@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8d425c3c73d8114e90e2d51088da8fa, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: 580c7d478daaa81409ffcc5362e20985, type: 3}
+  m_Name: HealSkill
   m_EditorClassIdentifier: 
-  CharacterImage: {fileID: 0}
-  Attack: 0
-  Health: 0
-  Defense: 0
+  Name: Heal
+  CoolDown: 2
+  Type: 1
+  Icon: {fileID: 0}
