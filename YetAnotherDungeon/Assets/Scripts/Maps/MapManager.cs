@@ -15,6 +15,7 @@ public class TileData
     [Serializable]
     public class TilemapData
     {
+        public string MapName;
         public List<TileData> Tiles = new List<TileData>();
     }
 
