@@ -8,7 +8,7 @@ public class Character : MonoBehaviour
     public string Name;
     public Sprite Avatar;
     public bool IsAlly;
-    public List<Skill> Skills;
+    public List<SkillConfig> Skills;
 
     public float Speed => Attributes.CalculateSpeed(Level);
     public int Defense => Attributes.CalculateSpeed(Level);

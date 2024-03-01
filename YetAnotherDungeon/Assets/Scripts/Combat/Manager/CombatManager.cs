@@ -109,17 +109,17 @@ public class CombatManager : MonoBehaviour
         // 在这里可以实现选择技能和目标的逻辑
         // 例如，优先使用冷却时间已经结束的技能
         // 按照降序排序技能，cd高的先释放
-        Skill skillToUse = null;
-        foreach (Skill skill in character.Skills.OrderByDescending(x => x.CoolDown))
+        SkillConfig skillConfigToUse = null;
+        foreach (SkillConfig skill in character.Skills.OrderByDescending(x => x.CoolDown))
         {
             if (RoundCounter % skill.CoolDown == 0)
             {
-                skillToUse = skill;
+                skillConfigToUse = skill;
                 break; // 找到可用的技能后跳出循环
             }
         }
 
-        if (skillToUse != null)
+        if (skillConfigToUse != null)
         {
             // 假设技能需要目标，而且是攻击技能，选择第一个存活的对方角色
             Character target = character is AllyCharacter
@@ -127,7 +127,7 @@ public class CombatManager : MonoBehaviour
                 : Allies.Find(a => a.Health > 0);
             if (target != null)
             {
-                skillToUse.CastSkill(character, target); // 使用技能
+                skillConfigToUse.CastSkill(character, target); // 使用技能
             }
         }
         else

@@ -1,8 +1,7 @@
-
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewAttackSkill", menuName = "Skill System/AttackSkill")]
-public class AttackSkill : Skill
+[CreateAssetMenu(fileName = "NewHealSkill", menuName = "Skill System/HealSkill")]
+public class HealSkillConfig : SkillConfig
 {
     public override void CastSkill(Character user, Character target)
     {

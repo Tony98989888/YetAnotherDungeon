@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewSkill", menuName = "Skill System/Skill")]
-public class Skill : ScriptableObject
+public class SkillConfig : ScriptableObject
 {
     public string Name; // 技能名称
     public float CoolDown; // 冷却时间
