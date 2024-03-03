@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: MapConfig
   m_EditorClassIdentifier: 
   MapData:
-  - MapName: TestMap
-    Map: {fileID: 5401416562140285920, guid: ebaa18d28cc8f204fbfff224ad3172c8, type: 3}
+  - Name: TestMap
+    Layers:
+    - {fileID: 5637743618775782859, guid: 43f51d3bdf6b5bc42ad6dab733ea8793, type: 3}
+    - {fileID: 3743274013355064858, guid: 1bae89a52b4b6f542a62f7482853e8e3, type: 3}
+    - {fileID: 7624985475481846729, guid: fe8e61312a379314f822c732f561c17d, type: 3}
