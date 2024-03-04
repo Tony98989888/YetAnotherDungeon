@@ -16,20 +16,10 @@ public class TilemapSaveData
     public string Name;
     public List<TileSaveData> LayerData;
 
-    public TilemapSaveData()
-    {
-        LayerData = new List<TileSaveData>();
-    }
-
     public TilemapSaveData(string name)
     {
         Name = name;
         LayerData = new List<TileSaveData>();
-    }
-
-    public TilemapSaveData(List<TileSaveData> layerData)
-    {
-        LayerData = layerData;
     }
 }
 
@@ -46,14 +36,4 @@ public class MapSaveData
 {
     public MapIndex Index;
     public List<TilemapSaveData> TilemapDatas;
-
-    public MapSaveData()
-    {
-        TilemapDatas = new List<TilemapSaveData>();
-    }
-
-    public MapSaveData(List<TilemapSaveData> tilemapDatas)
-    {
-        TilemapDatas = tilemapDatas;
-    }
 }

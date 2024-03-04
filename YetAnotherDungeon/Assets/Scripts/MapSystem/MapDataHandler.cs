@@ -47,14 +47,19 @@ public class MapDataHandler : MonoBehaviour
             return null;
         }
 
-        //Create grid
-        var grid = new GameObject($"{index}").AddComponent<Grid>();
-
         var filePath = Path.Combine(MapDataSavePath, $"{index}.json");
         var savedData = File.ReadAllText(filePath);
-        var mapSaveDa = JsonUtility.FromJson<MapSaveData>(savedData);
+        var mapSaveData = JsonUtility.FromJson<MapSaveData>(savedData);
 
-        foreach (var tilemapSaveData in mapSaveDa.TilemapDatas)
+        return mapSaveData;
+    }
+
+    public static GameObject LoadMap(MapSaveData mapSaveData)
+    {
+        //Create grid
+        var grid = new GameObject($"{mapSaveData.Index}").AddComponent<Grid>();
+
+        foreach (var tilemapSaveData in mapSaveData.TilemapDatas)
         {
             var tilemap = new GameObject($"{tilemapSaveData.Name}").AddComponent<Tilemap>();
             tilemap.AddComponent<TilemapRenderer>();
@@ -66,6 +71,6 @@ public class MapDataHandler : MonoBehaviour
             }
         }
 
-        return mapSaveDa;
+        return grid.GameObject();
     }
 }

@@ -10,15 +10,9 @@ namespace Maps.Configs
     {
         public MapIndex Index;
         public List<Tilemap> Tilemaps;
-
-        public MapData()
-        {
-            Index = MapIndex.None;
-            Tilemaps = new List<Tilemap>();
-        }
+        
     }
     
-    // Map config contains all maps
     [CreateAssetMenu(fileName = "NewMapConfig", menuName = "Tilemap system/MapConfig")]
     public class MapConfig : ScriptableObject
     {
