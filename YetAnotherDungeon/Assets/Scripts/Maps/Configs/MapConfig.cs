@@ -5,12 +5,17 @@ using UnityEngine.Tilemaps;
 
 namespace Maps.Configs
 {
-    // Map = Combination of tile maps
     [Serializable]
-    public struct MapData
+    public class MapData
     {
-        public string Name;
-        public List<Tilemap> Layers;
+        public MapIndex Index;
+        public List<Tilemap> Tilemaps;
+
+        public MapData()
+        {
+            Index = MapIndex.None;
+            Tilemaps = new List<Tilemap>();
+        }
     }
     
     // Map config contains all maps

@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [Serializable]
-public struct MapData
+public struct _MapData
 {
     public string Name;
     public List<Tilemap> Layers;
@@ -19,9 +19,9 @@ public struct MapData
 public struct LayerData
 {
     public string Name;
-    public List<TileData> Tiles;
+    public List<_TileData> Tiles;
 
-    public LayerData(string name, List<TileData> tiles)
+    public LayerData(string name, List<_TileData> tiles)
     {
         Name = name;
         Tiles = tiles;
@@ -29,7 +29,7 @@ public struct LayerData
 }
 
 [Serializable]
-public struct TileData
+public struct _TileData
 {
     public TileBase Tile;
     public Vector3Int Position;
@@ -59,8 +59,6 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
-        // LoadTileConfigs();
-        LoadMap("Test1");
     }
 
     private void LoadTileConfigs()
@@ -71,62 +69,6 @@ public class MapManager : MonoBehaviour
             foreach (var tile in config.Tiles)
             {
                 m_tileInfo.Add(tile, config);
-            }
-        }
-    }
-
-    public void SaveMap(MapData mapData)
-    {
-        foreach (var layer in mapData.Layers)
-        {
-            var savePath = Path.Combine(Application.persistentDataPath, $"{mapData.Name}");
-            Directory.CreateDirectory(savePath);
-            LayerData layerData = new LayerData(layer.name, new List<TileData>());
-            foreach (var position in layer.cellBounds.allPositionsWithin)
-            {
-                TileBase tile = layer.GetTile(position);
-                if (tile != null)
-                {
-                    TileData tileData = new TileData()
-                    {
-                        Tile = tile,
-                        Position = position,
-                    };
-                    layerData.Tiles.Add(tileData);
-                }
-            }
-
-            string json = JsonUtility.ToJson(layerData);
-            File.WriteAllText(Path.Combine(savePath, $"{layer.name}.json"), json);
-            Debug.Log($"Tilemap saved to {Path.Combine(savePath, $"{layer.name}.json")}");
-        }
-    }
-
-    public void LoadMap(string mapName)
-    {
-       
-        var savePath = Path.Combine(Application.persistentDataPath, $"{mapName}");
-        if (!Directory.Exists(savePath))
-        {
-            Debug.LogError($"Path: {savePath} do not exist!");
-            return;
-        }
-        
-        var grid = new GameObject($"{mapName}").AddComponent<Grid>();
-        
-        var filePaths = Directory.GetFiles(savePath);
-        foreach (var path in filePaths)
-        {
-            var fileName = path.Split(Path.DirectorySeparatorChar.ToString()).Last();
-            var tilemap = new GameObject($"{fileName}").AddComponent<Tilemap>();
-            tilemap.AddComponent<TilemapRenderer>();
-            tilemap.transform.SetParent(grid.transform);
-            tilemap.ClearAllTiles();
-            var savedData = File.ReadAllText(Path.Combine(savePath, $"{fileName}"));
-            var mapData = JsonUtility.FromJson<LayerData>(savedData);
-            foreach (var tile in mapData.Tiles)
-            {
-                tilemap.SetTile(tile.Position, tile.Tile);
             }
         }
     }
