@@ -1,21 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+using MapSystem.CustomMapSystem;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Test : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Tilemap tilemap;
+
+    public void Start()
     {
-        var allies = GameObject.FindObjectsOfType<Character>().Where(x => x.IsAlly).ToList();
-        var enemies = GameObject.FindObjectsOfType<Character>().Where(x => !x.IsAlly).ToList();
-        CombatManager.Instance.StartBattle(allies, enemies);
+        tilemap = GameObject.FindObjectOfType<Tilemap>().GetComponentInChildren<Tilemap>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        
+        if (Input.GetMouseButtonUp(0))
+        {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int tileposition = tilemap.WorldToCell(mousePosition);
+
+            if (tilemap.GetTile<FunctionalTile>(tileposition) != null)
+            {
+                Debug.Log(tilemap.GetTile<FunctionalTile>(tileposition).GetCustomTileType());
+            }
+        }
     }
 }
