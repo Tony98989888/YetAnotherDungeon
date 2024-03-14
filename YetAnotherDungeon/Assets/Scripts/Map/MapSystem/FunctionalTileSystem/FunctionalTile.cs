@@ -7,6 +7,7 @@ namespace MapSystem.CustomMapSystem
     public enum FunctionalTileType
     {
         PlayerStart,
+        Obstacle,
     }
 
     public class FunctionalTile : TileBase

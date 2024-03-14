@@ -39,7 +39,7 @@ public class MapManager : MonoBehaviour
         // Save original maps for new save
         foreach (var data in MapConfig.MapData)
         {
-            
+            // Check if map data exist for current save if exist then we do not save
         }
     }
     

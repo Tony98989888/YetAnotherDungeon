@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: MapConfig
   m_EditorClassIdentifier: 
   MapData:
-  - Name: TestMap
-    Layers:
-    - {fileID: 5637743618775782859, guid: 43f51d3bdf6b5bc42ad6dab733ea8793, type: 3}
-    - {fileID: 3743274013355064858, guid: 1bae89a52b4b6f542a62f7482853e8e3, type: 3}
-    - {fileID: 7624985475481846729, guid: fe8e61312a379314f822c732f561c17d, type: 3}
+  - Index: 3
+    Tilemaps:
+    - {fileID: 2502057848519280461, guid: e0ed3c396ab98eb428d81e642875c166, type: 3}

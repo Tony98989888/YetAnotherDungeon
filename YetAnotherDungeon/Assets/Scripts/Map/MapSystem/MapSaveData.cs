@@ -8,6 +8,7 @@ public enum MapIndex
     None,
     Startup,
     Village,
+    CombatTutorial,
 }
 
 [Serializable]
