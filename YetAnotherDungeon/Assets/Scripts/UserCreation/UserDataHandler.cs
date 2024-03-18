@@ -6,9 +6,14 @@ namespace UserCreation
     public class UserDataHandler
     {
         // Save structure should be like ../Save/User_1
-        static bool CreateSaveFolder()
+        public static string CreateNewUser()
         {
             string saveDirectory = Path.Combine(Application.persistentDataPath, "Saves");
+            if (!Directory.Exists(saveDirectory))
+            {
+                Directory.CreateDirectory(saveDirectory);
+            }
+
 
             int count = Directory.GetFiles(saveDirectory).Length;
             string newSaveName = string.Concat("User_", count);
@@ -19,19 +24,18 @@ namespace UserCreation
             {
                 Directory.CreateDirectory(playerSaveDirectory);
                 Debug.Log($"Save directory for player {newSaveName} created at {playerSaveDirectory}");
-                return true;
+                return playerSaveDirectory;
             }
             else
             {
-                Debug.LogError("A save directory for this player already exists.");
-                return false;
+                return null;
             }
         }
 
         public static void SavePlayerData(PlayerData data)
         {
             string json = JsonUtility.ToJson(data);
-            string playerSaveDirectory = Path.Combine(Application.persistentDataPath, "Saves", data.Name);
+            string playerSaveDirectory = data.SavePath;
             string saveFilePath = Path.Combine(playerSaveDirectory, "playerData.json");
 
             File.WriteAllText(saveFilePath, json);
@@ -63,5 +67,6 @@ namespace UserCreation
     public class PlayerData
     {
         public string Name;
+        public string SavePath;
     }
 }

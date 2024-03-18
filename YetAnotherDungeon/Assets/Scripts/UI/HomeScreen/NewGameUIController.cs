@@ -3,6 +3,7 @@ using deVoid.Utils;
 using TMPro;
 using UI.Popup;
 using UnityEngine;
+using UserCreation;
 
 namespace UI.StartupScene
 {
@@ -10,14 +11,27 @@ namespace UI.StartupScene
     {
         [SerializeField] TMP_InputField m_playerName;
 
-
         public void OnCreateNewSave()
         {
-            var playerName = m_playerName.text;
+            PlayerData playerData = new PlayerData
+            {
+                Name = m_playerName.text,
+            };
+
             PopupOptionsProperties data =
-                new PopupOptionsProperties("InValid user name!!!", "Confirm", "Cancel", () => { }, null);
+                new PopupOptionsProperties("Are you sure?", "Confirm", "Cancel",
+                    () => { OnConfirmCreateNewUser(playerData); }, () => { });
             Signals.Get<ShowPopupOptionsSignal>().Dispatch(data);
-            Debug.Log("InValid player name");
+        }
+
+        void OnConfirmCreateNewUser(PlayerData data)
+        {
+            var savePath = UserDataHandler.CreateNewUser();
+            if (savePath != null)
+            {
+                data.SavePath = savePath;
+                UserDataHandler.SavePlayerData(data);
+            }
         }
     }
 }
