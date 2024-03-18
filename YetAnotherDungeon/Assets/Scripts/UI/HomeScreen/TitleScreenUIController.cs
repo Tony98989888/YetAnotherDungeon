@@ -5,9 +5,13 @@ namespace UI.StartupScene
 {
     public class TitleScreenUIController : AWindowController
     {
+        public void NewGame()
+        {
+            Signals.Get<NewGameSignal>().Dispatch();
+        }
     }
 
-    public class TitleScreenSignal : ASignal
+    public class NewGameSignal : ASignal
     {
     }
 }

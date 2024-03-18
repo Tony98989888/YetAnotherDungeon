@@ -1,5 +1,6 @@
 using System;
 using deVoid.UIFramework;
+using deVoid.Utils;
 using UnityEngine;
 
 namespace UI.StartupScene
@@ -16,6 +17,17 @@ namespace UI.StartupScene
         void Awake()
         {
             m_uiFrame = m_uiSettings.CreateUIInstance();
+            Signals.Get<NewGameSignal>().AddListener(OnNewGameStart);
+        }
+
+        void OnNewGameStart()
+        {
+            m_uiFrame.OpenWindow(ScreenID.NewGameUI);
+        }
+
+        private void OnDestroy()
+        {
+            Signals.Get<NewGameSignal>().RemoveListener(OnNewGameStart);
         }
 
         void Start()

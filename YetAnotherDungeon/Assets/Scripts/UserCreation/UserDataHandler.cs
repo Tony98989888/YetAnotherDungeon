@@ -5,7 +5,7 @@ namespace UserCreation
 {
     public class UserDataHandler
     {
-        public static bool CreateSaveFolder(string playerName)
+        static bool CreateSaveFolder(string playerName)
         {
             if (string.IsNullOrWhiteSpace(playerName))
             {
