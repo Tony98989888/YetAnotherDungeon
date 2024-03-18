@@ -9,7 +9,7 @@ namespace UI.HomeScreen
     {
         [SerializeField] Button m_portraitButton;
 
-        public void SetUserData(PlayerData data)
+        public void SetData(PlayerData data)
         {
             m_portraitButton.GetComponentInChildren<TMP_Text>().text = data.Name;
         }
