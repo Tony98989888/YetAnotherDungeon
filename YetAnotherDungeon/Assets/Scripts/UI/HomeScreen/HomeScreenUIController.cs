@@ -1,6 +1,7 @@
 using System;
 using deVoid.UIFramework;
 using deVoid.Utils;
+using UI.Popup;
 using UnityEngine;
 
 namespace UI.StartupScene
@@ -18,6 +19,14 @@ namespace UI.StartupScene
         {
             m_uiFrame = m_uiSettings.CreateUIInstance();
             Signals.Get<NewGameSignal>().AddListener(OnNewGameStart);
+            Signals.Get<ShowPopupOptionsSignal>().AddListener(OnShowPopupWindow);
+        }
+
+
+        void OnDestroy()
+        {
+            Signals.Get<NewGameSignal>().RemoveListener(OnNewGameStart);
+            Signals.Get<ShowPopupOptionsSignal>().RemoveListener(OnShowPopupWindow);
         }
 
         void OnNewGameStart()
@@ -25,10 +34,11 @@ namespace UI.StartupScene
             m_uiFrame.OpenWindow(ScreenID.NewGameUI);
         }
 
-        private void OnDestroy()
+        void OnShowPopupWindow(PopupOptionsProperties data)
         {
-            Signals.Get<NewGameSignal>().RemoveListener(OnNewGameStart);
+            m_uiFrame.OpenWindow(ScreenID.OptionsPanel, data);
         }
+
 
         void Start()
         {

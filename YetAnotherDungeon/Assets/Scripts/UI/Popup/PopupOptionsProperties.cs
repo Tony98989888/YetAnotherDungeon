@@ -5,7 +5,7 @@ using UnityEngine;
 namespace UI.Popup
 {
     [Serializable]
-    public class PopupProperties : WindowProperties
+    public class PopupOptionsProperties : WindowProperties
     {
         public readonly string Message;
         public readonly string ConfirmButtonText;
@@ -13,7 +13,8 @@ namespace UI.Popup
         public readonly Action ConfirmAction;
         public readonly Action CancelAction;
 
-        public PopupProperties(string message, string confirmButtonText, string cancelButtonText, Action confirmAction,
+        public PopupOptionsProperties(string message, string confirmButtonText, string cancelButtonText,
+            Action confirmAction,
             Action cancelAction)
         {
             Message = message;

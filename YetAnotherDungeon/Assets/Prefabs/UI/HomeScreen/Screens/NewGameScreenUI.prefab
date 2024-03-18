@@ -851,7 +851,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1094933223436007091}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5369801691389615483}
+        m_TargetAssemblyTypeName: UI.StartupScene.NewGameUIController, Assembly-CSharp
+        m_MethodName: OnCreateNewSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5377396176838125084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1074,6 +1086,7 @@ MonoBehaviour:
     hideOnForegroundLost: 1
     windowQueuePriority: 0
     isPopup: 0
+  m_playerName: {fileID: 1609135156525445453}
 --- !u!114 &2276289971512211420
 MonoBehaviour:
   m_ObjectHideFlags: 0

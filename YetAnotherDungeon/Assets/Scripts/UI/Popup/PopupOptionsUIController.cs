@@ -1,12 +1,17 @@
 using System;
 using deVoid.UIFramework;
+using deVoid.Utils;
 using TMPro;
 using UnityEngine;
 
 namespace UI.Popup
 {
+    public class ShowPopupOptionsSignal : ASignal<PopupOptionsProperties>
+    {
+    }
+
     [Serializable]
-    public class PopupUIController : AWindowController<PopupProperties>
+    public class PopupOptionsUIController : AWindowController<PopupOptionsProperties>
     {
         [SerializeField] TextMeshProUGUI m_message;
 

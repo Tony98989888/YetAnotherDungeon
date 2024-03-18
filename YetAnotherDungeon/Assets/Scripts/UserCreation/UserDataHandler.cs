@@ -5,22 +5,20 @@ namespace UserCreation
 {
     public class UserDataHandler
     {
-        static bool CreateSaveFolder(string playerName)
+        // Save structure should be like ../Save/User_1
+        static bool CreateSaveFolder()
         {
-            if (string.IsNullOrWhiteSpace(playerName))
-            {
-                Debug.LogError("Player name cannot be empty.");
-                return false;
-            }
-            
             string saveDirectory = Path.Combine(Application.persistentDataPath, "Saves");
-            
-            string playerSaveDirectory = Path.Combine(saveDirectory, playerName);
-            
+
+            int count = Directory.GetFiles(saveDirectory).Length;
+            string newSaveName = string.Concat("User_", count);
+
+            string playerSaveDirectory = Path.Combine(saveDirectory, newSaveName);
+
             if (!Directory.Exists(playerSaveDirectory))
             {
                 Directory.CreateDirectory(playerSaveDirectory);
-                Debug.Log($"Save directory for player {playerName} created at {playerSaveDirectory}");
+                Debug.Log($"Save directory for player {newSaveName} created at {playerSaveDirectory}");
                 return true;
             }
             else
