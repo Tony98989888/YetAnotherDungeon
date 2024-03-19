@@ -4,6 +4,7 @@ namespace UI
     {
         public const string TitleScreenUI = "TitleScreenUI";
         public const string NewGameUI = "NewGameScreenUI";
-        public const string OptionsPanel = "OptionsPanel";
+        public const string OptionsPanelUI = "OptionsPanelUI";
+        public const string UserSelectionUI = "UserSelectionUI";
     }
 }

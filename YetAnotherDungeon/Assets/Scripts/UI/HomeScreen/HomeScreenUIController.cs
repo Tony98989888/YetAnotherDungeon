@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
 using deVoid.UIFramework;
 using deVoid.Utils;
+using UI.HomeScreen;
 using UI.Popup;
 using UnityEngine;
+using UserCreation;
 
 namespace UI.StartupScene
 {
@@ -20,13 +23,21 @@ namespace UI.StartupScene
             m_uiFrame = m_uiSettings.CreateUIInstance();
             Signals.Get<NewGameSignal>().AddListener(OnNewGameStart);
             Signals.Get<ShowPopupOptionsSignal>().AddListener(OnShowPopupWindow);
+            Signals.Get<ShowUserSelectionUISignal>().AddListener(OnShowUserSelectionWindow);
         }
-
 
         void OnDestroy()
         {
             Signals.Get<NewGameSignal>().RemoveListener(OnNewGameStart);
             Signals.Get<ShowPopupOptionsSignal>().RemoveListener(OnShowPopupWindow);
+            Signals.Get<ShowUserSelectionUISignal>().RemoveListener(OnShowUserSelectionWindow);
+        }
+
+
+        void OnShowUserSelectionWindow()
+        {
+            var data = UserDataHandler.LoadAllSaves();
+            m_uiFrame.OpenWindow(ScreenID.UserSelectionUI, new UserSelectionProperties(data));
         }
 
         void OnNewGameStart()
@@ -36,7 +47,7 @@ namespace UI.StartupScene
 
         void OnShowPopupWindow(PopupOptionsProperties data)
         {
-            m_uiFrame.OpenWindow(ScreenID.OptionsPanel, data);
+            m_uiFrame.OpenWindow(ScreenID.OptionsPanelUI, data);
         }
 
 

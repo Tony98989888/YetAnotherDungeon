@@ -1,12 +1,17 @@
 using System;
 using System.Collections.Generic;
 using deVoid.UIFramework;
+using deVoid.Utils;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using UserCreation;
 
 namespace UI.HomeScreen
 {
+    public class ShowUserSelectionUISignal : ASignal
+    {
+    }
+
     [Serializable]
     public class UserSelectionProperties : WindowProperties
     {
@@ -20,10 +25,11 @@ namespace UI.HomeScreen
 
     public class UserSelectionUIController : AWindowController<UserSelectionProperties>
     {
-        [SerializeField]
-        PlayerPortraitComponent m_playerPortraitEntry = null;
+        [SerializeField] PlayerPortraitComponent m_playerPortraitEntry = null;
 
         List<PlayerPortraitComponent> m_allPlayers = new List<PlayerPortraitComponent>();
+
+        [SerializeField] GridLayoutGroup m_userContainer;
 
         protected override void OnPropertiesSet()
         {
@@ -37,10 +43,16 @@ namespace UI.HomeScreen
             {
                 Destroy(m_allPlayers[i].gameObject);
             }
+
             m_allPlayers.Clear();
-            var instance = Instantiate(m_playerPortraitEntry, m_playerPortraitEntry.transform.parent, false);
-            instance.gameObject.SetActive(true);
-            m_allPlayers.Add(instance);
+
+            for (int i = 0; i < data.Count; i++)
+            {
+                var instance = Instantiate(m_playerPortraitEntry, m_userContainer.transform, false);
+
+                instance.gameObject.SetActive(true);
+                m_allPlayers.Add(instance);
+            }
         }
     }
 }
