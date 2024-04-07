@@ -39,7 +39,7 @@ namespace UI.HomeScreen
 
         public void SetData(List<PlayerData> data)
         {
-            for (int i = m_allPlayers.Count; i > 0; i--)
+            for (int i = m_allPlayers.Count - 1; i > 0; i--)
             {
                 Destroy(m_allPlayers[i].gameObject);
             }
