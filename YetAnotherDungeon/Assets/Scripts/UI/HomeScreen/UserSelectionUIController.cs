@@ -49,7 +49,8 @@ namespace UI.HomeScreen
             for (int i = 0; i < data.Count; i++)
             {
                 var instance = Instantiate(m_playerPortraitEntry, m_userContainer.transform, false);
-
+                instance.SetData(data[i]);
+                instance.SetButtonCallback(() => { Debug.Log("Begin Game"); });
                 instance.gameObject.SetActive(true);
                 m_allPlayers.Add(instance);
             }
