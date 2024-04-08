@@ -3,15 +3,18 @@ using Maps.Configs;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UserCreation;
 
 public class MapDataHandler : MonoBehaviour
 {
-    private const string MapDataFolderName = "MapData";
-    static readonly string MapDataSavePath = Path.Combine(Application.persistentDataPath, $"{MapDataFolderName}");
+    const string MapDataFolderName = "MapData";
+    // static readonly string MapDataSavePath = Path.Combine(Application.persistentDataPath, $"{MapDataFolderName}");
 
-    public static void SaveMapData(MapData mapData)
+    public static void SaveMap(MapData mapData, PlayerData playerData)
     {
-        Directory.CreateDirectory(MapDataSavePath);
+        var savePath = Path.Combine(playerData.SavePath, MapDataFolderName);
+        Directory.CreateDirectory(savePath);
+        
         MapSaveData saveData = new MapSaveData();
         foreach (var layer in mapData.Tilemaps)
         {
@@ -35,19 +38,20 @@ public class MapDataHandler : MonoBehaviour
         }
 
         string json = JsonUtility.ToJson(saveData);
-        File.WriteAllText(Path.Combine(MapDataSavePath, $"{mapData.Index}.json"), json);
-        Debug.Log($"Tilemap saved to - {Path.Combine(MapDataSavePath, $"{mapData.Index}.json")}");
+        File.WriteAllText(Path.Combine(savePath, $"{mapData.Index}.json"), json);
+        Debug.Log($"Tilemap saved to - {Path.Combine(savePath, $"{mapData.Index}.json")}");
     }
 
-    public static MapSaveData LoadMapData(MapIndex index)
+    public static MapSaveData LoadMapData(MapIndex index, PlayerData playerData)
     {
-        if (!Directory.Exists(MapDataSavePath))
+        var savePath = Path.Combine(playerData.SavePath, MapDataFolderName);
+        if (!Directory.Exists(savePath))
         {
-            Debug.LogError($"{MapDataSavePath} do not exist!");
+            Debug.LogError($"{savePath} do not exist!");
             return null;
         }
 
-        var filePath = Path.Combine(MapDataSavePath, $"{index}.json");
+        var filePath = Path.Combine(savePath, $"{index}.json");
         var savedData = File.ReadAllText(filePath);
         var mapSaveData = JsonUtility.FromJson<MapSaveData>(savedData);
 

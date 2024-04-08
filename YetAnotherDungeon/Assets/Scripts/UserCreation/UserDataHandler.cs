@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Maps.Configs;
 using UnityEngine;
 
 namespace UserCreation
@@ -134,5 +135,6 @@ namespace UserCreation
     {
         public string Name;
         public string SavePath;
+        public MapIndex CurrentMap;
     }
 }

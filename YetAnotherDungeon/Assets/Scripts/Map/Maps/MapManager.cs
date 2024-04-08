@@ -1,46 +1,58 @@
+
 using Maps.Configs;
+using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UserCreation;
 
-public class MapManager : MonoBehaviour
+public class MapManager : Singleton<MapManager>
 {
-    public static MapManager Instance { get; private set; }
-
     public static MapSaveData CurrentMapData;
     public static GameObject CurrentMapObject;
+    
+    [ShowOnly, SerializeField]
+    MapConfig m_mapConfig;
 
-    public MapConfig MapConfig;
-
-    private void Awake()
+    void Awake()
     {
-        if (Instance == null)
+        EventBetter.Listen(this, (OnBeginNewGame newGame) =>
         {
-            Instance = this;
+            SaveAllRawMaps(newGame.PlayerData);
+        });
+
+        if (m_mapConfig == null)
+        {
+            m_mapConfig = Resources.Load<MapConfig>("MapConfig");
         }
-        else
+    }
+
+    void SaveAllRawMaps(PlayerData playerData)
+    {
+        foreach (var map in m_mapConfig.MapData)
         {
-            Destroy(gameObject);
+            MapDataHandler.SaveMap(map, playerData);
         }
     }
 
 
-    public static void SwitchMap(MapIndex index)
-    {
-        if (CurrentMapData != null && CurrentMapObject != null)
-        {
-            Destroy(CurrentMapObject);
-        }
+    // public static void SwitchMap(MapIndex index)
+    // {
+    //     if (CurrentMapData != null && CurrentMapObject != null)
+    //     {
+    //         Destroy(CurrentMapObject);
+    //     }
+    //
+    //     CurrentMapData = MapDataHandler.LoadMapData(index);
+    //     CurrentMapObject = MapDataHandler.LoadMap(CurrentMapData);
+    // }
 
-        CurrentMapData = MapDataHandler.LoadMapData(index);
-        CurrentMapObject = MapDataHandler.LoadMap(CurrentMapData);
-    }
-
-    public void Initialize()
-    {
-        // Save original maps for new save
-        foreach (var data in MapConfig.MapData)
-        {
-            // Check if map data exist for current save if exist then we do not save
-        }
-    }
+    // public void Initialize()
+    // {
+    //     // Save original maps for new save
+    //     foreach (var data in MapConfig.MapData)
+    //     {
+    //         // Check if map data exist for current save if exist then we do not save
+    //     }
+    // }
     
 }

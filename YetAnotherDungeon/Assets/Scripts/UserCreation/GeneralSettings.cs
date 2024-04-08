@@ -29,7 +29,7 @@ namespace UserCreation
             get { return _instance; }
         }
 
-        private void OnEnable()
+        void OnEnable()
         {
             throw new NotImplementedException();
         }

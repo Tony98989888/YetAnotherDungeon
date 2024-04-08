@@ -1,67 +1,39 @@
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
+using UserCreation;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public enum GameState
+    PlayerData m_currentPlayer;
+
+    void Awake()
     {
-        Normal,
-        Combat
+        InitializeManager();
     }
 
-    public static GameManager Instance { get; private set; }
-    public GameState CurrentState { get; private set; }
-    
-    private void Awake()
+    void Start()
     {
-        if (Instance == null)
+    }
+
+    void Update()
+    {
+    }
+
+
+    void InitializeManager()
+    {
+        var singletonTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t =>
+            t.IsClass && !t.IsAbstract && t.BaseType != null && t.BaseType.IsGenericType &&
+            t.BaseType.GetGenericTypeDefinition() == typeof(Singleton<>));
+
+        foreach (var type in singletonTypes)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void Start()
-    {
-        // 初始状态设为Normal
-        ChangeState(GameState.Normal);
-    }
-
-    public void ChangeState(GameState newState)
-    {
-        CurrentState = newState;
-        switch (newState)
-        {
-            case GameState.Normal:
-                EnterNormalState();
-                break;
-            case GameState.Combat:
-                EnterCombatState();
-                break;
-        }
-    }
-
-    private void EnterNormalState()
-    {
-        Debug.Log("Entered Normal State");
-    }
-
-    private void EnterCombatState()
-    {
-        Debug.Log("Entered Combat State");
-    }
-    
-    private void Update()
-    {
-        switch (CurrentState)
-        {
-            case GameState.Normal:
-                break;
-            case GameState.Combat:
-                break;
+            if (FindObjectOfType(type) == null)
+            {
+                GameObject obj = new GameObject(type.Name);
+                obj.AddComponent(type);
+            }
         }
     }
 }

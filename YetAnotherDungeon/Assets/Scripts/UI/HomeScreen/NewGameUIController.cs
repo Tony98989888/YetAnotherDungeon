@@ -16,6 +16,7 @@ namespace UI.StartupScene
             PlayerData playerData = new PlayerData
             {
                 Name = m_playerName.text,
+                CurrentMap = MapIndex.Startup,
             };
 
             PopupOptionsProperties data =
@@ -32,6 +33,8 @@ namespace UI.StartupScene
                 data.SavePath = savePath;
                 UserDataHandler.SavePlayerData(data);
             }
+
+            EventBetter.Raise(new OnBeginNewGame() { PlayerData = data });
         }
     }
 }
