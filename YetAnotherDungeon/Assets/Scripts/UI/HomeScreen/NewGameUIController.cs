@@ -1,6 +1,8 @@
 using deVoid.UIFramework;
 using deVoid.Utils;
+using Map.MapSystem;
 using TMPro;
+using TMPro.Examples;
 using UI.Popup;
 using UnityEngine;
 using UserCreation;
@@ -35,6 +37,7 @@ namespace UI.StartupScene
             }
 
             EventBetter.Raise(new OnBeginNewGame() { PlayerData = data });
+            SceneLoader.Instance.LoadScene(SceneNames.SampleScene, () => {Debug.Log("Ready"); });
         }
     }
 }

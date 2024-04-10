@@ -10,3 +10,8 @@ public class OnBeginNewGame
 {
     public PlayerData PlayerData;
 }
+
+public class OnGameSceneInitialized
+{
+    
+}

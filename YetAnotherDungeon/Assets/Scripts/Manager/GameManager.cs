@@ -1,25 +1,24 @@
 using System.Linq;
 using System.Reflection;
+using Unity.Collections;
 using UnityEngine;
 using UserCreation;
 
 public class GameManager : Singleton<GameManager>
 {
+    [ReadOnly, SerializeField]
     PlayerData m_currentPlayer;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         InitializeManager();
+        
+        EventBetter.Listen(this, (OnBeginNewGame newGame) =>
+        {
+            m_currentPlayer = newGame.PlayerData;
+        });
     }
-
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-    }
-
 
     void InitializeManager()
     {

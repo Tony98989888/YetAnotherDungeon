@@ -1,7 +1,4 @@
-
 using Maps.Configs;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UserCreation;
 
@@ -13,8 +10,9 @@ public class MapManager : Singleton<MapManager>
     [ShowOnly, SerializeField]
     MapConfig m_mapConfig;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         EventBetter.Listen(this, (OnBeginNewGame newGame) =>
         {
             SaveAllRawMaps(newGame.PlayerData);
@@ -33,8 +31,7 @@ public class MapManager : Singleton<MapManager>
             MapDataHandler.SaveMap(map, playerData);
         }
     }
-
-
+    
     // public static void SwitchMap(MapIndex index)
     // {
     //     if (CurrentMapData != null && CurrentMapObject != null)
@@ -54,5 +51,4 @@ public class MapManager : Singleton<MapManager>
     //         // Check if map data exist for current save if exist then we do not save
     //     }
     // }
-    
 }

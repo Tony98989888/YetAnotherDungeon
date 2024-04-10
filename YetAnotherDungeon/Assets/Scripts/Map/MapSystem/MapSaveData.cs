@@ -37,4 +37,10 @@ public class MapSaveData
 {
     public MapIndex Index;
     public List<TilemapSaveData> TilemapDatas;
+
+    public MapSaveData()
+    {
+        Index = MapIndex.None;
+        TilemapDatas = new List<TilemapSaveData>();
+    }
 }
