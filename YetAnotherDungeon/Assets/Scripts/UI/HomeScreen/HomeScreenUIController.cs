@@ -36,7 +36,7 @@ namespace UI.StartupScene
 
         void OnShowUserSelectionWindow()
         {
-            var data = UserDataHandler.LoadAllSaves();
+            var data = UserDataUtilities.LoadAllSaves();
             m_uiFrame.OpenWindow(ScreenID.UserSelectionUI, new UserSelectionProperties(data));
         }
 

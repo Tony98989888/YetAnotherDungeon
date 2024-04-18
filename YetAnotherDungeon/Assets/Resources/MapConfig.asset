@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MapConfig
   m_EditorClassIdentifier: 
   MapData:
-  - Index: 3
+  - Index: 1
     Tilemaps:
-    - {fileID: 2502057848519280461, guid: e0ed3c396ab98eb428d81e642875c166, type: 3}
+    - {fileID: 6246960215833727801, guid: 1e60ec4e1a7c08646801186572593b22, type: 3}

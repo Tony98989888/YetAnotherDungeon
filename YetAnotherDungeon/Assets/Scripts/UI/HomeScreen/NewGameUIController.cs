@@ -29,15 +29,15 @@ namespace UI.StartupScene
 
         void OnConfirmCreateNewUser(PlayerData data)
         {
-            var savePath = UserDataHandler.CreateNewUser();
+            var savePath = UserDataUtilities.CreateNewUser();
             if (savePath != null)
             {
                 data.SavePath = savePath;
-                UserDataHandler.SavePlayerData(data);
+                UserDataUtilities.SavePlayerData(data);
             }
 
             EventBetter.Raise(new OnBeginNewGame() { PlayerData = data });
-            SceneLoader.Instance.LoadScene(SceneNames.SampleScene, () => {Debug.Log("Ready"); });
+            SceneManager.Instance.LoadScene(SceneNames.SampleScene, () => {Debug.Log("Ready"); });
         }
     }
 }
